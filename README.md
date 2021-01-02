@@ -1,6 +1,6 @@
 # react-doc-scan
 
-> A React component performing border detection, perspective correction and simple image filters over a provided image 📲 📸
+> React component performing border detection, perspective correction and simple image filters over a provided image 📲 📸
 
 [![NPM](https://img.shields.io/npm/v/react-doc-scan.svg)](https://www.npmjs.com/package/react-doc-scan) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 

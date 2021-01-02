@@ -1,7 +1,7 @@
 {
   "name": "react-doc-scan",
   "version": "1.0.0",
-  "description": "A React component document scanner with live border detection, live correction and simple image filters 📲 📸",
+  "description": "React component performing border detection, perspective correction and simple image filters over a provided image 📲 📸",
   "author": "giacomocerquone",
   "license": "MIT",
   "repository": "giacomocerquone/react-doc-scan",
