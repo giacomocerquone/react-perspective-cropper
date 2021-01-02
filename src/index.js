@@ -1,6 +1,16 @@
 import React from 'react'
-import styles from './styles.module.css'
+import { OpenCvProvider, useOpenCv } from 'opencv-react'
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
+function MyComp() {
+  const data = useOpenCv()
+  console.log(data)
+  return <p>asdasd</p>
+}
+
+export const DocumentScanner = () => {
+  return (
+    <OpenCvProvider>
+      <MyComp />
+    </OpenCvProvider>
+  )
 }
