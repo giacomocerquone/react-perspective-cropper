@@ -7806,6 +7806,11 @@ open@^7.0.2:
     is-docker "^2.0.0"
     is-wsl "^2.1.1"
 
+opencv-react@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/opencv-react/-/opencv-react-0.0.2.tgz#48c6bafd96e33fffe4ec92680c1b132884a0d09a"
+  integrity sha512-oyK4YTx2ZFtTbn8c9pwXmHmd+1V9gwKYMePqPMZTuEdPjgFnFq8mjv9sO5i7kZMY+k7IT9oxb5wiJOR6JBnYYQ==
+
 opn@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/opn/-/opn-5.5.0.tgz#fc7164fab56d235904c51c3b27da6758ca3b9bfc"
