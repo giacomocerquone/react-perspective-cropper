@@ -51,6 +51,7 @@
     "dist"
   ],
   "dependencies": {
-    "opencv-react": "^0.0.2"
+    "opencv-react": "0.0.3",
+    "react-draggable": "^4.4.3"
   }
 }
