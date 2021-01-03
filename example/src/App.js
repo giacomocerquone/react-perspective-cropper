@@ -5,6 +5,7 @@ import { DocumentScanner, cropAndFilterImg } from 'react-doc-scan'
 const App = () => {
   const res = useRef()
   const [cropState, setCropState] = useState()
+  const [img, setImg] = useState()
 
   const onCropComplete = useCallback((s) => setCropState(s), [])
 
@@ -15,14 +16,30 @@ const App = () => {
       saturation: 1,
       contrast: 1.1
     }
-    const editedImg = cropAndFilterImg(cropState, filterOpts)
+    const editedImg = cropAndFilterImg(img, cropState, filterOpts)
     res.current = editedImg
-    // In res.current you have the cropped and filtered image
+    // in res.current you have the cropped and filtered image
+  }
+
+  const onImgSelection = async (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      // it can also be a http or base64 string for example
+      setImg(e.target.files[0])
+    }
   }
 
   return (
-    <div>
-      <DocumentScanner src='' onComplete={onCropComplete} />
+    <div
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%'
+      }}
+    >
+      <DocumentScanner image={img} onComplete={onCropComplete} />
+      <input type='file' onChange={onImgSelection} accept='image/*' />
       <button onClick={doSomething}>Ho finito</button>
     </div>
   )
