@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 
-import { DocumentScanner, manipulateImg } from 'react-doc-scan'
+import { DocumentScanner } from 'react-doc-scan'
 
 const App = () => {
   const [cropState, setCropState] = useState()
   const [img, setImg] = useState()
+  const cropperRef = useRef()
 
   const onDragStop = useCallback((s) => setCropState(s), [])
 
@@ -13,7 +14,7 @@ const App = () => {
       format: 'blob' // or base64
     }
     console.log(cropState)
-    const editedImg = manipulateImg(img, cropState, filterOpts)
+    cropperRef.current.done()
     // editedImg is your filtered, cropped and transformed image
   }
 
@@ -34,7 +35,7 @@ const App = () => {
         height: '100%'
       }}
     >
-      <DocumentScanner image={img} onDragStop={onDragStop} />
+      <DocumentScanner ref={cropperRef} image={img} onDragStop={onDragStop} />
       <input type='file' onChange={onImgSelection} accept='image/*' />
       <button onClick={doSomething}>Ho finito</button>
     </div>
