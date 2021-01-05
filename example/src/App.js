@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react'
 
-import { DocumentScanner } from 'react-doc-scan'
+import { DocumentScanner } from 'react-perspective-cropper'
 
 const App = () => {
   const [cropState, setCropState] = useState()

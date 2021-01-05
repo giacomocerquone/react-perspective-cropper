@@ -4,7 +4,7 @@
   "description": "React component performing border detection, perspective correction and simple image filters over a provided image 📲 📸",
   "author": "giacomocerquone",
   "license": "MIT",
-  "repository": "giacomocerquone/react-doc-scan",
+  "repository": "giacomocerquone/react-perspective-cropper",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",

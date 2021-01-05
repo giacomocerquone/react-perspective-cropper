@@ -8448,7 +8448,7 @@ react-dev-utils@^10.2.1:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-"react-doc-scan@link:..":
+"react-perspective-cropper@link:..":
   version "0.0.0"
   uid ""
 
