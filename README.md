@@ -39,11 +39,15 @@ class Example extends Component {
 }
 ```
 
+## Usage
+
+## Inspiration and help
+
+Huge thanks to [ngx-document-scanner](https://github.com/roiperlman/ngx-document-scanner) which served me quite a lot of openCV code to use.
+
 ## Nice to have
 
 It would be nice to have a react-live-doc-scan component which uses a webcam featuring live borders recognition.
-
-## Usage
 
 ## License
 
