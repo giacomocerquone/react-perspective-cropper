@@ -4,7 +4,7 @@ import { OpenCvProvider, useOpenCv } from 'opencv-react'
 import { calcDims, readFile } from './lib/utils'
 import useRefCallback from './hooks/useRefCallback'
 import CropPoints from './lib/CropPoints'
-export * from './lib/cropAndFilterImg'
+export * from './lib/manipulateImg'
 
 const imageDimensions = { width: 0, height: 0 }
 let imageResizeRatio
@@ -17,7 +17,7 @@ const buildImgContainerStyle = (previewDims) => ({
 // EDITEDIMAGE === docCanvas
 // PREVIEWCANVAS === previewCanvas
 
-export const DocumentScanner = ({ image, onComplete }) => {
+export const DocumentScanner = ({ image, onDragStop }) => {
   const docCanvasRef = useRef()
   const [previewCanvas, setPreviewCanvasRef] = useRefCallback()
   const [previewDims, setPreviewDims] = useState()
@@ -141,6 +141,15 @@ export const DocumentScanner = ({ image, onComplete }) => {
     setCropPoints((cPs) => ({ ...cPs, [area]: { x, y } }))
   }, [])
 
+  const onStop = useCallback(
+    (position, area, cropPoints) => {
+      const { x, y } = position
+      setCropPoints((cPs) => ({ ...cPs, [area]: { x, y } }))
+      onDragStop({ ...cropPoints, [area]: { x, y } })
+    },
+    [onDragStop]
+  )
+
   if (!image) {
     return null
   }
@@ -149,7 +158,6 @@ export const DocumentScanner = ({ image, onComplete }) => {
     <OpenCvProvider openCvPath='/opencv/opencv.js' onLoad={onOpenCvLoaded}>
       <div
         style={{
-          border: '1px solid #000',
           position: 'relative',
           ...(previewDims && buildImgContainerStyle(previewDims))
         }}
@@ -159,6 +167,7 @@ export const DocumentScanner = ({ image, onComplete }) => {
             cropPoints={cropPoints}
             previewDims={previewDims}
             onDrag={onDrag}
+            onStop={onStop}
           />
         )}
         <canvas style={{ zIndex: 5 }} ref={setPreviewCanvasRef} />

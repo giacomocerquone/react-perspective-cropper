@@ -13,6 +13,7 @@ const CropPoint = ({
   cropPoints,
   pointArea,
   defaultPosition,
+  onStop: externalOnStop,
   onDrag: externalOnDrag
 }) => {
   const onDrag = useCallback(
@@ -22,12 +23,20 @@ const CropPoint = ({
     [externalOnDrag]
   )
 
+  const onStop = useCallback(
+    (_, position) => {
+      externalOnStop(position, pointArea, cropPoints)
+    },
+    [externalOnDrag, cropPoints]
+  )
+
   return (
     <Draggable
       bounds='parent'
       defaultPosition={defaultPosition}
       position={cropPoints[pointArea]}
       onDrag={onDrag}
+      onStop={onStop}
     >
       <div style={cropPointStyle} />
     </Draggable>

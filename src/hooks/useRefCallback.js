@@ -6,8 +6,6 @@ function useRefCallback() {
     setRef(node)
   }, [])
 
-  console.log('REF', ref)
-
   return [ref, refCallback]
 }
 
