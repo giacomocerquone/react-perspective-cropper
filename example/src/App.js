@@ -6,10 +6,7 @@ const App = () => {
   const [cropState, setCropState] = useState()
   const [img, setImg] = useState()
 
-  const onDragStop = useCallback((s) => {
-    console.log('called')
-    setCropState(s)
-  }, [])
+  const onDragStop = useCallback((s) => setCropState(s), [])
 
   const doSomething = () => {
     const filterOpts = {
