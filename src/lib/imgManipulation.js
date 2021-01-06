@@ -1,7 +1,6 @@
 export const transform = (
   cv,
   docCanvas,
-  previewCanvas,
   cropPoints,
   imageResizeRatio,
   setPreviewPaneDimensions
@@ -60,7 +59,7 @@ export const transform = (
   setPreviewPaneDimensions()
 }
 
-export const applyFilter = async (cv, docCanvas, preview) => {
+export const applyFilter = async (cv, docCanvas) => {
   // default options
   const options = {
     blur: false,

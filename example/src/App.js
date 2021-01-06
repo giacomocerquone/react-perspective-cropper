@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react'
 
-import { DocumentScanner } from 'react-perspective-cropper'
+import { Cropper } from 'react-perspective-cropper'
 
 const App = () => {
   const [cropState, setCropState] = useState()
@@ -35,9 +35,10 @@ const App = () => {
         height: '100%'
       }}
     >
-      <DocumentScanner ref={cropperRef} image={img} onDragStop={onDragStop} />
+      <Cropper ref={cropperRef} image={img} onDragStop={onDragStop} />
       <input type='file' onChange={onImgSelection} accept='image/*' />
       <button onClick={doSomething}>Ho finito</button>
+      <button onClick={() => console.log('asd')}>asdasdasd</button>
     </div>
   )
 }

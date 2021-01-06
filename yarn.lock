@@ -7811,10 +7811,10 @@ open@^7.0.2:
     is-docker "^2.0.0"
     is-wsl "^2.1.1"
 
-opencv-react@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/opencv-react/-/opencv-react-0.0.3.tgz#c971ac6aa4f274547b4d432c48b8e763620d1da2"
-  integrity sha512-A0NcCem5LXG0yzHS7Bn/k9ojDuO9wIzDmVfVx0Wq/U1yiiDusPqqML+mH6klGl/OeBpinmvFHSE+3IbaTw3oBQ==
+opencv-react@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/opencv-react/-/opencv-react-0.0.4.tgz#dbb7e11b02bb7fc8cdfccda038649010eba6ca2b"
+  integrity sha512-3fbfYIlSWzu9lfhMMq5WKhZtuNiBhzt/+VqUHmQOSyk2/wIK5a3R4KMnqJZMIHvYlyvoUJml79p0rC8sSg3cfQ==
 
 opn@^5.5.0:
   version "5.5.0"

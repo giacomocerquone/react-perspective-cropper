@@ -7,8 +7,8 @@
 ## Intro
 
 react-perspective-cropper doesn't, yet, do live borders recognition like some famous mobile apps.<br />
-Though it exports a main `<DocumentScanner />` component which given an image it renders a cropper component with an already applied but editable crop area.<br />
-You **must** pass an img through the `src` prop otherwise the component won't be rendered. Then you get the "onComplete" callback that receives a cropState. Once you got that, whenever your user finished cropping, you can call a utility method exported by this lib which is `cropAndFilterImg()` which, guess what, crops and filter the image (you can choose the result format between base64 and blob).<br /><br />
+Though it exports a main `<Cropper />` component which given an image it renders a cropper component with an already applied but editable crop area.<br />
+You **must** pass an img through the `src` prop otherwise the component won't be rendered. Using its ref you have a `done` async method that you can call and it will return the cropped and filtered image (you can choose the result format between base64 and blob).<br /><br />
 
 If you have special needs, please open a issue and we'll discuss it there!
 
@@ -41,13 +41,19 @@ class Example extends Component {
 
 ## Usage
 
-## Inspiration and help
+## OpenCV
 
-Huge thanks to [ngx-document-scanner](https://github.com/roiperlman/ngx-document-scanner) which served me quite a lot of openCV code to use.
+This cropper uses OpenCV for border recognition, perspective transformation and b&w thresholding. In order to use it, I've created this other handy wrapper around it: [opencv-react](https://github.com/giacomocerquone/opencv-react)<br/>
+If you're already using it or if you're importing OpenCV manually in a different way, **this lib got you covered as long as you provide the OpenCV instance in `window.cv` and the component isn't rendered before OpenCV finished loading**. <br/>
+So, be careful.
 
 ## Nice to have
 
 It would be nice to have a react-doc-scan component which uses a webcam featuring live borders recognition.
+
+## Inspiration and help
+
+Huge thanks to [ngx-document-scanner](https://github.com/roiperlman/ngx-document-scanner) which served me quite a lot of openCV code to use.
 
 ## License
 
