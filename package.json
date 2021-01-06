@@ -1,7 +1,7 @@
 {
   "name": "react-perspective-cropper",
   "version": "0.0.1",
-  "description": "React component performing border detection, perspective correction and simple image filters over a provided image 📲 📸",
+  "description": "React component performing crop, border detection, perspective correction and simple image filters over a provided image 📲 📸",
   "author": "giacomocerquone",
   "license": "MIT",
   "repository": "giacomocerquone/react-perspective-cropper",
