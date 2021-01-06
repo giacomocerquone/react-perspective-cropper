@@ -39,7 +39,8 @@ export const DocumentScanner = React.forwardRef(
           docCanvasRef.current,
           previewCanvas,
           cropPoints,
-          imageResizeRatio
+          imageResizeRatio,
+          setPreviewPaneDimensions
         )
         showPreview()
         applyFilter(cv, docCanvasRef.current)
@@ -47,18 +48,18 @@ export const DocumentScanner = React.forwardRef(
       }
     }))
 
-    const setPreviewPaneDimensions = () => {
+    const setPreviewPaneDimensions = (canvasRef = docCanvasRef) => {
       // set preview pane dimensions
       const newPreviewDims = calcDims(
-        docCanvasRef.current.width,
-        docCanvasRef.current.height
+        canvasRef.current.width,
+        canvasRef.current.height
       )
       setPreviewDims(newPreviewDims)
 
       previewCanvas.width = newPreviewDims.width
       previewCanvas.height = newPreviewDims.height
 
-      imageResizeRatio = newPreviewDims.width / docCanvasRef.current.width
+      imageResizeRatio = newPreviewDims.width / canvasRef.current.width
     }
 
     const createCanvas = (src) => {

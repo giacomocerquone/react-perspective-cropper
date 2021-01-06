@@ -3,7 +3,8 @@ export const transform = (
   docCanvas,
   previewCanvas,
   cropPoints,
-  imageResizeRatio
+  imageResizeRatio,
+  setPreviewPaneDimensions
 ) => {
   const dst = cv.imread(docCanvas)
 
@@ -55,6 +56,8 @@ export const transform = (
   Ms.delete()
   Md.delete()
   transformMatrix.delete()
+
+  setPreviewPaneDimensions()
 }
 
 export const applyFilter = async (cv, docCanvas, preview) => {
