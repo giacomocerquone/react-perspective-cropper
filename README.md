@@ -78,7 +78,13 @@ const App = () => {
 }
 ```
 
-## Usage
+## Todo
+
+- [] add propTypes
+- [] add index.d.ts
+- [] refine example
+- [] parametrize color and size of points and delimiters lines
+- [] better handling of img size
 
 ## OpenCV
 
@@ -92,7 +98,7 @@ It would be nice to have a react-doc-scan component which uses a webcam featurin
 
 ## Inspiration and help
 
-Huge thanks to [ngx-document-scanner](https://github.com/roiperlman/ngx-document-scanner) which served me quite a lot of openCV code to use.
+Huge thanks to [ngx-document-scanner](https://github.com/roiperlman/ngx-document-scanner) which served me quite some openCV and canvas code to use.
 
 ## License
 

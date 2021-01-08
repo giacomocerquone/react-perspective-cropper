@@ -18,8 +18,6 @@ export const transform = (
     point.y / imageResizeRatio
   ])
 
-  console.log(sourceCoordinates)
-
   // get max width
   const maxWidth = Math.max(bR.x - bL.x, tR.x - tL.x) / imageResizeRatio
   // get max height

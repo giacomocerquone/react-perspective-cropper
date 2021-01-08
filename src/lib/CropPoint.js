@@ -5,8 +5,9 @@ const cropPointStyle = {
   width: 15,
   height: 15,
   backgroundColor: '#3cabe2',
-  borderRadius: 0,
-  position: 'absolute'
+  borderRadius: '100%',
+  position: 'absolute',
+  zIndex: 1001
 }
 
 const CropPoint = ({

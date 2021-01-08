@@ -11,6 +11,7 @@ import { calcDims, readFile } from '../lib/utils'
 import useRefCallback from '../hooks/useRefCallback'
 import CropPoints from '../lib/CropPoints'
 import { applyFilter, transform } from '../lib/imgManipulation'
+import CropPointsDelimiters from './CropPointsDelimiters'
 
 const buildImgContainerStyle = (previewDims) => ({
   width: previewDims.width,
@@ -198,7 +199,17 @@ const Canvas = ({ image, onDragStop, onChange, cropperRef }) => {
           onStop={onStop}
         />
       )}
-      <canvas style={{ zIndex: 5 }} ref={setPreviewCanvasRef} />
+      {previewDims && (
+        <CropPointsDelimiters
+          previewDims={previewDims}
+          cropPoints={cropPoints}
+          imageResizeRatio={imageResizeRatio}
+        />
+      )}
+      <canvas
+        style={{ zIndex: 5, pointerEvents: 'none' }}
+        ref={setPreviewCanvasRef}
+      />
     </div>
   )
 }
