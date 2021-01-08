@@ -1,6 +1,12 @@
 import React, { useCallback, useRef, useState } from 'react'
-
+import { Button, Upload } from 'antd'
+import { CheckOutlined, PlusOutlined } from '@ant-design/icons'
 import { Cropper } from 'react-perspective-cropper'
+
+import './App.css'
+import Header from './components/Header'
+
+const { Dragger } = Upload
 
 const App = () => {
   const [cropState, setCropState] = useState()
@@ -22,50 +28,60 @@ const App = () => {
   }
 
   const onImgSelection = async (e) => {
-    if (e.target.files && e.target.files.length > 0) {
+    console.log(e)
+    if (e.fileList && e.fileList.length > 0) {
       // it can also be a http or base64 string for example
-      setImg(e.target.files[0])
+      setImg(e.fileList[0].originFileObj)
     }
   }
 
+  const draggerProps = {
+    name: 'file',
+    multiple: false,
+    onChange: onImgSelection
+  }
+
   return (
-    <div
-      style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%'
-      }}
-    >
-      <Cropper
-        ref={cropperRef}
-        image={img}
-        onChange={onChange}
-        onDragStop={onDragStop}
-      />
-      <input
-        type='file'
-        key={inputKey}
-        onChange={onImgSelection}
-        accept='image/*'
-      />
-      <button onClick={doSomething}>Ho finito</button>
-      <button
-        onClick={() => {
-          cropperRef.current.backToCrop()
-        }}
-      >
-        Back
-      </button>
-      <button
-        onClick={() => {
-          setImg(undefined)
-          setInputKey((i) => i + 1)
-        }}
-      >
-        Reset
-      </button>
+    <div className='root-container'>
+      <Header />
+      <div className='content-container'>
+        {cropperRef?.current && img && (
+          <div className='buttons-container'>
+            <Button onClick={doSomething} icon={<CheckOutlined />}>
+              Done
+            </Button>
+            <Button
+              onClick={() => {
+                cropperRef.current.backToCrop()
+              }}
+            >
+              Back
+            </Button>
+            <Button
+              onClick={() => {
+                setImg(undefined)
+                setInputKey((i) => i + 1)
+              }}
+            >
+              Reset
+            </Button>
+          </div>
+        )}
+        <Cropper
+          ref={cropperRef}
+          image={img}
+          onChange={onChange}
+          onDragStop={onDragStop}
+        />
+        {!img && (
+          <Dragger {...draggerProps}>
+            <p>
+              <PlusOutlined />
+            </p>
+            <p>Upload</p>
+          </Dragger>
+        )}
+      </div>
     </div>
   )
 }

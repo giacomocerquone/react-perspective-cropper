@@ -1,0 +1,32 @@
+.ant-upload-drag-container {
+  padding: 50px 100px;
+}
+
+.root-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.site-page-header {
+  border: 1px solid rgb(235, 237, 240);
+  background-color: #f5f5f5;
+  padding: 24px;
+}
+
+.content-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-bottom: 20px;
+}
+
+.buttons-container {
+  margin: 10px 0;
+}
+
+.buttons-container > button {
+  margin: 0 5px;
+}
