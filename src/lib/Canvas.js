@@ -20,29 +20,48 @@ const buildImgContainerStyle = (previewDims) => ({
 const imageDimensions = { width: 0, height: 0 }
 let imageResizeRatio
 
-const Canvas = ({ image, onDragStop, cropperRef }) => {
-  const docCanvasRef = useRef()
+const Canvas = ({ image, onDragStop, onChange, cropperRef }) => {
+  const { loaded: cvLoaded, cv } = useOpenCv()
+  const canvasRef = useRef()
   const [previewCanvas, setPreviewCanvasRef] = useRefCallback()
   const [previewDims, setPreviewDims] = useState()
   const [cropPoints, setCropPoints] = useState({})
-  const { loaded: cvLoaded, cv } = useOpenCv()
+  const [loading, setLoading] = useState(false)
+  const [mode, setMode] = useState('crop')
 
   useImperativeHandle(cropperRef, () => ({
-    done: (opts) => {
-      transform(
-        cv,
-        docCanvasRef.current,
-        cropPoints,
-        imageResizeRatio,
-        setPreviewPaneDimensions
-      )
-      showPreview()
-      applyFilter(cv, docCanvasRef.current)
-      showPreview()
+    backToCrop: () => {
+      setMode('crop')
+    },
+    done: async (opts = {}) => {
+      return new Promise((resolve) => {
+        setLoading(true)
+        transform(
+          cv,
+          canvasRef.current,
+          cropPoints,
+          imageResizeRatio,
+          setPreviewPaneDimensions
+        )
+        applyFilter(cv, canvasRef.current)
+        if (opts.preview) {
+          setMode('preview')
+        }
+        canvasRef.current.toBlob((blob) => {
+          resolve(blob)
+          setLoading(false)
+        }, image.type)
+      })
     }
   }))
 
-  const setPreviewPaneDimensions = (canvasRef = docCanvasRef) => {
+  useEffect(() => {
+    if (mode === 'preview') {
+      showPreview()
+    }
+  }, [mode])
+
+  const setPreviewPaneDimensions = () => {
     // set preview pane dimensions
     const newPreviewDims = calcDims(
       canvasRef.current.width,
@@ -61,13 +80,13 @@ const Canvas = ({ image, onDragStop, cropperRef }) => {
       const img = document.createElement('img')
       img.onload = async () => {
         // set edited image canvas and dimensions
-        docCanvasRef.current = document.createElement('canvas')
-        docCanvasRef.current.width = img.width
-        docCanvasRef.current.height = img.height
-        const ctx = docCanvasRef.current.getContext('2d')
+        canvasRef.current = document.createElement('canvas')
+        canvasRef.current.width = img.width
+        canvasRef.current.height = img.height
+        const ctx = canvasRef.current.getContext('2d')
         ctx.drawImage(img, 0, 0)
-        imageDimensions.width = docCanvasRef.current.width
-        imageDimensions.height = docCanvasRef.current.height
+        imageDimensions.width = canvasRef.current.width
+        imageDimensions.height = canvasRef.current.height
         setPreviewPaneDimensions()
         resolve()
       }
@@ -76,7 +95,7 @@ const Canvas = ({ image, onDragStop, cropperRef }) => {
   }
 
   const showPreview = (image) => {
-    const src = image || cv.imread(docCanvasRef.current)
+    const src = image || cv.imread(canvasRef.current)
     const dst = new cv.Mat()
     const dsize = new cv.Size(0, 0)
     cv.resize(
@@ -93,7 +112,7 @@ const Canvas = ({ image, onDragStop, cropperRef }) => {
   }
 
   const detectContours = () => {
-    const dst = cv.imread(docCanvasRef.current)
+    const dst = cv.imread(canvasRef.current)
     const ksize = new cv.Size(5, 5)
     // convert the image to grayscale, blur it, and find edges in the image
     cv.cvtColor(dst, dst, cv.COLOR_RGBA2GRAY, 0)
@@ -129,10 +148,14 @@ const Canvas = ({ image, onDragStop, cropperRef }) => {
       'left-bottom': { x: rect.x, y: rect.y + rect.height }
     }
 
-    console.log('contours', contourCoordinates)
-
     setCropPoints(contourCoordinates)
   }
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(cropPoints)
+    }
+  }, [cropPoints])
 
   useEffect(() => {
     const bootstrap = async () => {
@@ -142,24 +165,24 @@ const Canvas = ({ image, onDragStop, cropperRef }) => {
       detectContours()
     }
 
-    if (image && previewCanvas && cvLoaded) {
+    if (image && previewCanvas && cvLoaded && mode === 'crop') {
       bootstrap()
     }
-  }, [image, previewCanvas, cvLoaded])
+  }, [image, previewCanvas, cvLoaded, mode])
 
   const onDrag = useCallback((position, area) => {
     const { x, y } = position
     setCropPoints((cPs) => ({ ...cPs, [area]: { x, y } }))
   }, [])
 
-  const onStop = useCallback(
-    (position, area, cropPoints) => {
-      const { x, y } = position
-      setCropPoints((cPs) => ({ ...cPs, [area]: { x, y } }))
+  const onStop = useCallback((position, area, cropPoints) => {
+    const { x, y } = position
+    setCropPoints((cPs) => ({ ...cPs, [area]: { x, y } }))
+    if (onDragStop) {
       onDragStop({ ...cropPoints, [area]: { x, y } })
-    },
-    [onDragStop]
-  )
+    }
+  }, [])
+
   return (
     <div
       style={{
@@ -167,7 +190,7 @@ const Canvas = ({ image, onDragStop, cropperRef }) => {
         ...(previewDims && buildImgContainerStyle(previewDims))
       }}
     >
-      {previewDims && (
+      {previewDims && mode === 'crop' && (
         <CropPoints
           cropPoints={cropPoints}
           previewDims={previewDims}

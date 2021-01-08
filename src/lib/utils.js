@@ -19,6 +19,7 @@ export const readFile = (file) => {
 export const calcDims = (width, height) => {
   const ratio = width / height
 
+  // TODO parametrize this
   const maxWidth = window.innerWidth - 40
   const maxHeight = window.innerHeight - 240
   const calculated = {

@@ -8,7 +8,12 @@
 
 react-perspective-cropper doesn't, yet, do live borders recognition like some famous mobile apps.<br />
 Though it exports a main `<Cropper />` component which given an image it renders a cropper component with an already applied but editable crop area.<br />
-You **must** pass an img through the `src` prop otherwise the component won't be rendered. Using its ref you have a `done` async method that you can call and it will return the cropped and filtered image (you can choose the result format between base64 and blob).<br /><br />
+You **must** pass an img through the `src` prop otherwise the component won't be rendered. Using its ref you have:
+
+- a `done` async method that you can call and it will return the cropped and filtered image and you have the option to also show a preview of the edited image!
+- a `backToCrop` method to use **only** if you requested for a preview in the done.
+
+<br />
 
 If you have special needs, please open a issue and we'll discuss it there!
 
@@ -27,15 +32,49 @@ yarn add react-perspective-cropper
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React from 'react'
 
-import MyComponent from 'react-perspective-cropper'
-import 'react-perspective-cropper/dist/index.css'
+const App = () => {
+  const [cropState, setCropState] = useState()
+  const [img, setImg] = useState()
+  const [inputKey, setInputKey] = useState(0)
+  const cropperRef = useRef()
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
+  const onDragStop = useCallback((s) => setCropState(s), [])
+  const onChange = useCallback((s) => setCropState(s), [])
+
+  const doSomething = async () => {
+    console.log(cropState)
+    try {
+      const res = await cropperRef.current.done({ preview: true })
+      console.log(res)
+    } catch (e) {
+      console.log('error', e)
+    }
   }
+
+  const onImgSelection = async (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      // it can also be a http or base64 string for example
+      setImg(e.target.files[0])
+    }
+  }
+
+  return (
+    <Cropper
+      ref={cropperRef}
+      image={img}
+      onChange={onChange}
+      onDragStop={onDragStop}
+    />
+    <input
+      type='file'
+      key={inputKey}
+      onChange={onImgSelection}
+      accept='image/*'
+    />
+    <button onClick={doSomething}>Ho finito</button>
+  )
 }
 ```
 
