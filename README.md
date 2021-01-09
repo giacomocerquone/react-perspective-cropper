@@ -84,12 +84,6 @@ const App = () => {
 }
 ```
 
-## Todo
-
-- [] add index.d.ts
-- [] better handling of img size
-- [] darken outer crop area through context.clip
-
 ## OpenCV
 
 This cropper uses OpenCV for border recognition, perspective transformation and b&w thresholding. In order to use it, I've created this other handy wrapper around it: [opencv-react](https://github.com/giacomocerquone/opencv-react)<br/>
