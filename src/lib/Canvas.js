@@ -22,7 +22,16 @@ const buildImgContainerStyle = (previewDims) => ({
 const imageDimensions = { width: 0, height: 0 }
 let imageResizeRatio
 
-const Canvas = ({ image, onDragStop, onChange, cropperRef, pointSize }) => {
+const Canvas = ({
+  image,
+  onDragStop,
+  onChange,
+  cropperRef,
+  pointSize,
+  lineWidth,
+  pointColor,
+  lineColor
+}) => {
   const { loaded: cvLoaded, cv } = useOpenCv()
   const canvasRef = useRef()
   const [previewCanvas, setPreviewCanvasRef] = useRefCallback()
@@ -198,6 +207,7 @@ const Canvas = ({ image, onDragStop, onChange, cropperRef, pointSize }) => {
       {previewDims && mode === 'crop' && cropPoints && (
         <CropPoints
           pointSize={pointSize}
+          pointColor={pointColor}
           cropPoints={cropPoints}
           previewDims={previewDims}
           onDrag={onDrag}
@@ -208,6 +218,8 @@ const Canvas = ({ image, onDragStop, onChange, cropperRef, pointSize }) => {
         <CropPointsDelimiters
           previewDims={previewDims}
           cropPoints={cropPoints}
+          lineWidth={lineWidth}
+          lineColor={lineColor}
         />
       )}
       <canvas
@@ -230,5 +242,8 @@ Canvas.propTypes = {
       backToCrop: T.func.isRequired
     })
   }),
-  pointSize: T.number
+  pointSize: T.number,
+  lineWidth: T.number,
+  pointColor: T.string,
+  lineColor: T.string
 }

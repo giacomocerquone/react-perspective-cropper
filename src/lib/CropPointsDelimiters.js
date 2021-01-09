@@ -2,7 +2,12 @@ import React, { useCallback, useEffect } from 'react'
 import useRefCallback from '../hooks/useRefCallback'
 import T from 'prop-types'
 
-const CropPointsDelimiters = ({ cropPoints, previewDims }) => {
+const CropPointsDelimiters = ({
+  cropPoints,
+  previewDims,
+  lineWidth = 3,
+  lineColor = '#3cabe2'
+}) => {
   const [canvas, setCanvasRef] = useRefCallback()
 
   const clearCanvas = useCallback(() => {
@@ -21,8 +26,8 @@ const CropPointsDelimiters = ({ cropPoints, previewDims }) => {
   const drawShape = useCallback(
     (sortedPoints) => {
       const ctx = canvas.getContext('2d')
-      ctx.lineWidth = 3
-      ctx.strokeStyle = '#3cabe2'
+      ctx.lineWidth = lineWidth
+      ctx.strokeStyle = lineColor
       ctx.beginPath()
       sortedPoints.forEach((point, index) => {
         if (index === 0) {
@@ -76,5 +81,7 @@ CropPointsDelimiters.propTypes = {
     'right-top': T.shape({ x: T.number, y: T.number }).isRequired,
     'right-bottom': T.shape({ x: T.number, y: T.number }).isRequired,
     'left-bottom': T.shape({ x: T.number, y: T.number }).isRequired
-  })
+  }),
+  lineColor: T.string,
+  lineWidth: T.number
 }

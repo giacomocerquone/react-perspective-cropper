@@ -87,7 +87,6 @@ const App = () => {
 ## Todo
 
 - [] add index.d.ts
-- [] parametrize color of delimiters lines
 - [] better handling of img size
 - [] darken outer crop area through context.clip
 
