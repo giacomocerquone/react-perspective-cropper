@@ -17,6 +17,10 @@ You **must** pass an img through the `src` prop otherwise the component won't be
 
 If you have special needs, please open a issue and we'll discuss it there!
 
+## Demo
+
+Take a look at the hosted example [here](https://giacomocerquone.github.io/react-perspective-cropper/)
+
 ## Install
 
 ```bash
@@ -81,8 +85,9 @@ const App = () => {
 ## Todo
 
 - [] add index.d.ts
-- [] parametrize color of points and delimiters lines
+- [] parametrize color of delimiters lines
 - [] better handling of img size
+- [] darken outer crop area through context.clip
 
 ## OpenCV
 
