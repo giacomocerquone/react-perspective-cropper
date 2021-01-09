@@ -80,10 +80,8 @@ const App = () => {
 
 ## Todo
 
-- [] add propTypes
 - [] add index.d.ts
-- [] refine example
-- [] parametrize color and size of points and delimiters lines
+- [] parametrize color of points and delimiters lines
 - [] better handling of img size
 
 ## OpenCV

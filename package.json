@@ -52,6 +52,7 @@
   ],
   "dependencies": {
     "opencv-react": "0.0.4",
+    "prop-types": "^15.7.2",
     "react-draggable": "^4.4.3"
   }
 }

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import CropPoint from './CropPoint'
+import T from 'prop-types'
 
 const CropPoints = (props) => {
   const { previewDims, ...otherProps } = props
@@ -33,3 +34,11 @@ const CropPoints = (props) => {
 }
 
 export default CropPoints
+
+CropPoints.propTypes = {
+  previewDims: T.shape({
+    ratio: T.number,
+    width: T.number,
+    height: T.number
+  })
+}

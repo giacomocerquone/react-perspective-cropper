@@ -6,6 +6,7 @@ import React, {
   useState
 } from 'react'
 import { useOpenCv } from 'opencv-react'
+import T from 'prop-types'
 
 import { calcDims, readFile } from '../lib/utils'
 import useRefCallback from '../hooks/useRefCallback'
@@ -21,12 +22,12 @@ const buildImgContainerStyle = (previewDims) => ({
 const imageDimensions = { width: 0, height: 0 }
 let imageResizeRatio
 
-const Canvas = ({ image, onDragStop, onChange, cropperRef }) => {
+const Canvas = ({ image, onDragStop, onChange, cropperRef, pointSize }) => {
   const { loaded: cvLoaded, cv } = useOpenCv()
   const canvasRef = useRef()
   const [previewCanvas, setPreviewCanvasRef] = useRefCallback()
   const [previewDims, setPreviewDims] = useState()
-  const [cropPoints, setCropPoints] = useState({})
+  const [cropPoints, setCropPoints] = useState()
   const [loading, setLoading] = useState(false)
   const [mode, setMode] = useState('crop')
 
@@ -191,19 +192,19 @@ const Canvas = ({ image, onDragStop, onChange, cropperRef }) => {
         ...(previewDims && buildImgContainerStyle(previewDims))
       }}
     >
-      {previewDims && mode === 'crop' && (
+      {previewDims && mode === 'crop' && cropPoints && (
         <CropPoints
+          pointSize={pointSize}
           cropPoints={cropPoints}
           previewDims={previewDims}
           onDrag={onDrag}
           onStop={onStop}
         />
       )}
-      {previewDims && (
+      {previewDims && mode === 'crop' && cropPoints && (
         <CropPointsDelimiters
           previewDims={previewDims}
           cropPoints={cropPoints}
-          imageResizeRatio={imageResizeRatio}
         />
       )}
       <canvas
@@ -215,3 +216,16 @@ const Canvas = ({ image, onDragStop, onChange, cropperRef }) => {
 }
 
 export default Canvas
+
+Canvas.propTypes = {
+  image: T.object.isRequired,
+  onDragStop: T.func,
+  onChange: T.func,
+  cropperRef: T.shape({
+    current: T.shape({
+      done: T.func.isRequired,
+      backToCrop: T.func.isRequired
+    })
+  }),
+  pointSize: T.number
+}

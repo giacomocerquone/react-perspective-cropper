@@ -18,17 +18,16 @@ const App = () => {
   const onChange = useCallback((s) => setCropState(s), [])
 
   const doSomething = async () => {
-    console.log(cropState)
+    console.log('CropState', cropState)
     try {
       const res = await cropperRef.current.done({ preview: true })
-      console.log(res)
+      console.log('Cropped and filtered image', res)
     } catch (e) {
       console.log('error', e)
     }
   }
 
   const onImgSelection = async (e) => {
-    console.log(e)
     if (e.fileList && e.fileList.length > 0) {
       // it can also be a http or base64 string for example
       setImg(e.fileList[0].originFileObj)
@@ -45,7 +44,7 @@ const App = () => {
     <div className='root-container'>
       <Header />
       <div className='content-container'>
-        {cropperRef?.current && img && (
+        {cropState && (
           <div className='buttons-container'>
             <Button onClick={doSomething} icon={<CheckOutlined />}>
               Done

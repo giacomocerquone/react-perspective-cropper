@@ -1,11 +1,8 @@
 import React, { useCallback, useEffect } from 'react'
 import useRefCallback from '../hooks/useRefCallback'
+import T from 'prop-types'
 
-const CropPointsDelimiters = ({
-  cropPoints,
-  previewDims,
-  imageResizeRatio
-}) => {
+const CropPointsDelimiters = ({ cropPoints, previewDims }) => {
   const [canvas, setCanvasRef] = useRefCallback()
 
   const clearCanvas = useCallback(() => {
@@ -44,7 +41,7 @@ const CropPointsDelimiters = ({
   )
 
   useEffect(() => {
-    if (Object.keys(cropPoints).length && canvas) {
+    if (cropPoints && canvas) {
       clearCanvas()
       const sortedPoints = sortPoints()
       drawShape(sortedPoints)
@@ -67,3 +64,17 @@ const CropPointsDelimiters = ({
 }
 
 export default CropPointsDelimiters
+
+CropPointsDelimiters.propTypes = {
+  previewDims: T.shape({
+    ratio: T.number,
+    width: T.number,
+    height: T.number
+  }),
+  cropPoints: T.shape({
+    'left-top': T.shape({ x: T.number, y: T.number }).isRequired,
+    'right-top': T.shape({ x: T.number, y: T.number }).isRequired,
+    'right-bottom': T.shape({ x: T.number, y: T.number }).isRequired,
+    'left-bottom': T.shape({ x: T.number, y: T.number }).isRequired
+  })
+}
