@@ -155,9 +155,9 @@ const Canvas = ({ image, onDragStop, onChange, cropperRef, pointSize }) => {
 
   useEffect(() => {
     if (onChange) {
-      onChange(cropPoints)
+      onChange({ ...cropPoints, loading })
     }
-  }, [cropPoints])
+  }, [cropPoints, loading])
 
   useEffect(() => {
     const bootstrap = async () => {
@@ -165,10 +165,13 @@ const Canvas = ({ image, onDragStop, onChange, cropperRef, pointSize }) => {
       await createCanvas(src)
       showPreview()
       detectContours()
+      setLoading(false)
     }
 
     if (image && previewCanvas && cvLoaded && mode === 'crop') {
       bootstrap()
+    } else {
+      setLoading(true)
     }
   }, [image, previewCanvas, cvLoaded, mode])
 

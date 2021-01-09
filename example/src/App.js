@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { Button, Upload } from 'antd'
+import { Button, Spin, Upload } from 'antd'
 import { CheckOutlined, PlusOutlined } from '@ant-design/icons'
 import { Cropper } from 'react-perspective-cropper'
 
@@ -11,7 +11,6 @@ const { Dragger } = Upload
 const App = () => {
   const [cropState, setCropState] = useState()
   const [img, setImg] = useState()
-  const [inputKey, setInputKey] = useState(0)
   const cropperRef = useRef()
 
   const onDragStop = useCallback((s) => setCropState(s), [])
@@ -59,7 +58,7 @@ const App = () => {
             <Button
               onClick={() => {
                 setImg(undefined)
-                setInputKey((i) => i + 1)
+                setCropState()
               }}
             >
               Reset
@@ -72,6 +71,7 @@ const App = () => {
           onChange={onChange}
           onDragStop={onDragStop}
         />
+        {cropState?.loading && <Spin />}
         {!img && (
           <Dragger {...draggerProps}>
             <p>
