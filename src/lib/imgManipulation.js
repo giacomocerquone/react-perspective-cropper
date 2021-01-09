@@ -57,7 +57,7 @@ export const transform = (
   setPreviewPaneDimensions()
 }
 
-export const applyFilter = async (cv, docCanvas) => {
+export const applyFilter = async (cv, docCanvas, filterCvParams) => {
   // default options
   const options = {
     blur: false,
@@ -66,7 +66,8 @@ export const applyFilter = async (cv, docCanvas) => {
     thMeanCorrection: 15,
     thBlockSize: 25,
     thMax: 255,
-    grayScale: true
+    grayScale: true,
+    ...filterCvParams
   }
   const dst = cv.imread(docCanvas)
 
@@ -85,8 +86,8 @@ export const applyFilter = async (cv, docCanvas) => {
         options.thMax,
         options.thMode,
         cv.THRESH_BINARY,
-        5,
-        8
+        options.thBlockSize,
+        options.thMeanCorrection
       )
     } else {
       dst.convertTo(dst, -1, 1, 60)

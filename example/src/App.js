@@ -19,7 +19,13 @@ const App = () => {
   const doSomething = async () => {
     console.log('CropState', cropState)
     try {
-      const res = await cropperRef.current.done({ preview: true })
+      const res = await cropperRef.current.done({
+        preview: true,
+        filterCvParams: {
+          thMeanCorrection: 13,
+          thMode: window.cv.ADAPTIVE_THRESH_GAUSSIAN_C
+        }
+      })
       console.log('Cropped and filtered image', res)
     } catch (e) {
       console.log('error', e)
