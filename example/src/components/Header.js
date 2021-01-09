@@ -41,6 +41,21 @@ const Header = () => {
               ❤️
             </span>
           </Descriptions.Item>
+          <Descriptions.Item label='Info'>
+            <Paragraph>
+              Make sure to only use HiRes images!
+              <br />
+              <b>
+                <a
+                  rel='noreferrer'
+                  target='_blank'
+                  href='https://github.com/giacomocerquone/react-perspective-cropper/blob/master/gifs/example-img.jpg?raw=true'
+                >
+                  You could use this image for example.
+                </a>
+              </b>
+            </Paragraph>
+          </Descriptions.Item>
         </Descriptions>
       </PageHeader>
     </div>
