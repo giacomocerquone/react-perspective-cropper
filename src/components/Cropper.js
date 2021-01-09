@@ -8,7 +8,7 @@ export const Cropper = React.forwardRef((props, ref) => {
   }
 
   return (
-    <OpenCvProvider openCvPath='/opencv/opencv.js'>
+    <OpenCvProvider openCvPath='./opencv/opencv.js'>
       <Canvas {...props} cropperRef={ref} />
     </OpenCvProvider>
   )
