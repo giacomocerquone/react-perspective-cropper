@@ -30,3 +30,9 @@
 .buttons-container > button {
   margin: 0 5px;
 }
+
+@media (max-width: 600px) {
+  .site-page-header {
+    display: none;
+  }
+}
