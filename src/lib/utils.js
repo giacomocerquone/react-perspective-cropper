@@ -16,12 +16,16 @@ export const readFile = (file) => {
   }
 }
 
-export const calcDims = (width, height) => {
+export const calcDims = (
+  width,
+  height,
+  externalMaxWidth,
+  externalMaxHeight
+) => {
   const ratio = width / height
 
-  // TODO parametrize this
-  const maxWidth = window.innerWidth - 40
-  const maxHeight = window.innerHeight - 240
+  const maxWidth = window.innerWidth || externalMaxWidth
+  const maxHeight = window.innerHeight || externalMaxHeight
   const calculated = {
     width: maxWidth,
     height: Math.round(maxWidth / ratio),

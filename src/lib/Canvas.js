@@ -30,7 +30,9 @@ const Canvas = ({
   pointSize,
   lineWidth,
   pointColor,
-  lineColor
+  lineColor,
+  maxWidth,
+  maxHeight
 }) => {
   const { loaded: cvLoaded, cv } = useOpenCv()
   const canvasRef = useRef()
@@ -76,7 +78,9 @@ const Canvas = ({
     // set preview pane dimensions
     const newPreviewDims = calcDims(
       canvasRef.current.width,
-      canvasRef.current.height
+      canvasRef.current.height,
+      maxWidth,
+      maxHeight
     )
     setPreviewDims(newPreviewDims)
 
