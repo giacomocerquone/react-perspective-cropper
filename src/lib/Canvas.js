@@ -9,7 +9,6 @@ import { useOpenCv } from 'opencv-react'
 import T from 'prop-types'
 
 import { calcDims, readFile } from '../lib/utils'
-import useRefCallback from '../hooks/useRefCallback'
 import CropPoints from '../lib/CropPoints'
 import { applyFilter, transform } from '../lib/imgManipulation'
 import CropPointsDelimiters from './CropPointsDelimiters'
@@ -36,7 +35,7 @@ const Canvas = ({
 }) => {
   const { loaded: cvLoaded, cv } = useOpenCv()
   const canvasRef = useRef()
-  const [previewCanvas, setPreviewCanvasRef] = useRefCallback()
+  const previewCanvasRef = useRef()
   const [previewDims, setPreviewDims] = useState()
   const [cropPoints, setCropPoints] = useState()
   const [loading, setLoading] = useState(false)
@@ -84,8 +83,8 @@ const Canvas = ({
     )
     setPreviewDims(newPreviewDims)
 
-    previewCanvas.width = newPreviewDims.width
-    previewCanvas.height = newPreviewDims.height
+    previewCanvasRef.current.width = newPreviewDims.width
+    previewCanvasRef.current.height = newPreviewDims.height
 
     imageResizeRatio = newPreviewDims.width / canvasRef.current.width
   }
@@ -121,7 +120,7 @@ const Canvas = ({
       imageResizeRatio,
       cv.INTER_AREA
     )
-    cv.imshow(previewCanvas, dst)
+    cv.imshow(previewCanvasRef.current, dst)
     src.delete()
     dst.delete()
   }
@@ -181,12 +180,12 @@ const Canvas = ({
       setLoading(false)
     }
 
-    if (image && previewCanvas && cvLoaded && mode === 'crop') {
+    if (image && previewCanvasRef.current && cvLoaded && mode === 'crop') {
       bootstrap()
     } else {
       setLoading(true)
     }
-  }, [image, previewCanvas, cvLoaded, mode])
+  }, [image, previewCanvasRef.current, cvLoaded, mode])
 
   const onDrag = useCallback((position, area) => {
     const { x, y } = position
@@ -228,7 +227,7 @@ const Canvas = ({
       )}
       <canvas
         style={{ zIndex: 5, pointerEvents: 'none' }}
-        ref={setPreviewCanvasRef}
+        ref={previewCanvasRef}
       />
     </div>
   )

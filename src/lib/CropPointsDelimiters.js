@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import useRefCallback from '../hooks/useRefCallback'
 import T from 'prop-types'
 
@@ -8,12 +8,12 @@ const CropPointsDelimiters = ({
   lineWidth = 3,
   lineColor = '#3cabe2'
 }) => {
-  const [canvas, setCanvasRef] = useRefCallback()
+  const canvas = useRef()
 
   const clearCanvas = useCallback(() => {
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.current.getContext('2d')
     ctx.clearRect(0, 0, previewDims.width, previewDims.height)
-  }, [canvas, previewDims])
+  }, [canvas.current, previewDims])
 
   const sortPoints = useCallback(() => {
     const sortOrder = ['left-top', 'right-top', 'right-bottom', 'left-bottom']
@@ -25,7 +25,7 @@ const CropPointsDelimiters = ({
 
   const drawShape = useCallback(
     (sortedPoints) => {
-      const ctx = canvas.getContext('2d')
+      const ctx = canvas.current.getContext('2d')
       ctx.lineWidth = lineWidth
       ctx.strokeStyle = lineColor
       ctx.beginPath()
@@ -42,20 +42,20 @@ const CropPointsDelimiters = ({
       })
       ctx.stroke()
     },
-    [canvas]
+    [canvas.current]
   )
 
   useEffect(() => {
-    if (cropPoints && canvas) {
+    if (cropPoints && canvas.current) {
       clearCanvas()
       const sortedPoints = sortPoints()
       drawShape(sortedPoints)
     }
-  }, [cropPoints, canvas])
+  }, [cropPoints, canvas.current])
 
   return (
     <canvas
-      ref={setCanvasRef}
+      ref={canvas}
       style={{
         position: 'absolute',
         zIndex: 5,
