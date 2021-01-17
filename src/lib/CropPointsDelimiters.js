@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef } from 'react'
-import useRefCallback from '../hooks/useRefCallback'
 import T from 'prop-types'
 
 const CropPointsDelimiters = ({

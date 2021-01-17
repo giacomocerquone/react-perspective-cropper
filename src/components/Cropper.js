@@ -2,7 +2,7 @@ import React from 'react'
 import { OpenCvProvider } from 'opencv-react'
 import Canvas from '../lib/Canvas'
 
-export const Cropper = React.forwardRef((props, ref) => {
+const Cropper = React.forwardRef((props, ref) => {
   if (!props.image) {
     return null
   }
@@ -13,3 +13,5 @@ export const Cropper = React.forwardRef((props, ref) => {
     </OpenCvProvider>
   )
 })
+
+export default Cropper

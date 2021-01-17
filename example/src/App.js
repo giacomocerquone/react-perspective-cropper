@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { Button, Spin, Upload } from 'antd'
 import { CheckOutlined, PlusOutlined } from '@ant-design/icons'
-import { Cropper } from 'react-perspective-cropper'
+import Cropper from 'react-perspective-cropper'
 
 import './App.css'
 import Header from './components/Header'

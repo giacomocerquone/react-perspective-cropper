@@ -1,1 +1,1 @@
-export * from './components/Cropper'
+export { default } from './components/Cropper'
