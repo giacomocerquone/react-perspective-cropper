@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-interface CropperProps {
+export interface CropperProps {
   image: string | File
   onDragStop: () => void
   onChange: () => void
@@ -13,4 +13,6 @@ interface CropperProps {
   maxHeight: number
 }
 
-export function Cropper(): React.FC<CropperProps>
+const Cropper: React.FC<CropperProps>
+
+export default Cropper
