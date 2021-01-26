@@ -15,10 +15,11 @@ const CropPoint = ({
   cropPoints,
   pointArea,
   defaultPosition,
-  pointSize = 20,
+  pointSize,
   pointColor = '#3cabe2',
   onStop: externalOnStop,
-  onDrag: externalOnDrag
+  onDrag: externalOnDrag,
+  bounds
 }) => {
   const onDrag = useCallback(
     (_, position) => {
@@ -51,7 +52,7 @@ const CropPoint = ({
 
   return (
     <Draggable
-      bounds='parent'
+      bounds={bounds}
       defaultPosition={defaultPosition}
       position={{
         x: cropPoints[pointArea].x - pointSize / 2,

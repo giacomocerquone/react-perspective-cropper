@@ -26,7 +26,7 @@ const Canvas = ({
   onDragStop,
   onChange,
   cropperRef,
-  pointSize,
+  pointSize = 20,
   lineWidth,
   pointColor,
   lineColor,
@@ -215,6 +215,18 @@ const Canvas = ({
           previewDims={previewDims}
           onDrag={onDrag}
           onStop={onStop}
+          bounds={{
+            left: previewCanvasRef?.current?.offsetLeft - pointSize / 2,
+            top: previewCanvasRef?.current?.offsetTop - pointSize / 2,
+            right:
+              previewCanvasRef?.current?.offsetLeft -
+              pointSize / 2 +
+              previewCanvasRef?.current?.offsetWidth,
+            bottom:
+              previewCanvasRef?.current?.offsetTop -
+              pointSize / 2 +
+              previewCanvasRef?.current?.offsetHeight
+          }}
         />
       )}
       {previewDims && mode === 'crop' && cropPoints && (
