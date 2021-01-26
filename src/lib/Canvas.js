@@ -60,6 +60,7 @@ const Canvas = ({
           setMode('preview')
         }
         canvasRef.current.toBlob((blob) => {
+          blob.name = image.name
           resolve(blob)
           setLoading(false)
         }, image.type)
