@@ -77,6 +77,7 @@ const App = () => {
           image={img}
           onChange={onChange}
           onDragStop={onDragStop}
+          maxWidth={window.innerWidth - 10}
         />
         {cropState?.loading && <Spin />}
         {!img && (

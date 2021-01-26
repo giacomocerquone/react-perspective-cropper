@@ -24,8 +24,8 @@ export const calcDims = (
 ) => {
   const ratio = width / height
 
-  const maxWidth = window.innerWidth || externalMaxWidth
-  const maxHeight = window.innerHeight || externalMaxHeight
+  const maxWidth = externalMaxWidth || window.innerWidth
+  const maxHeight = externalMaxHeight || window.innerHeight
   const calculated = {
     width: maxWidth,
     height: Math.round(maxWidth / ratio),
