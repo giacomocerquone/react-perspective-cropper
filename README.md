@@ -39,6 +39,7 @@ yarn add react-perspective-cropper
 
 ```jsx
 import React from 'react'
+import Cropper from 'react-perspective-cropper'
 
 const App = () => {
   const [cropState, setCropState] = useState()
