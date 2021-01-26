@@ -11,6 +11,7 @@ export interface CropperProps {
   lineColor: string
   maxWidth: number
   maxHeight: number
+  openCvPath: string
 }
 
 const Cropper: React.FC<CropperProps>

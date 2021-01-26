@@ -72,6 +72,7 @@ const App = () => {
           </div>
         )}
         <Cropper
+          openCvPath='./opencv/opencv.js'
           ref={cropperRef}
           image={img}
           onChange={onChange}
