@@ -35,6 +35,24 @@ or
 yarn add react-perspective-cropper
 ```
 
+## Props
+
+```typescript
+export interface CropperProps {
+  image: string | File
+  onDragStop: () => void
+  onChange: () => void
+  cropperRef: React.ElementRef
+  pointSize: number
+  lineWidth: number
+  pointColor: string
+  lineColor: string
+  maxWidth: number
+  maxHeight: number
+  openCvPath: string
+}
+```
+
 ## Usage
 
 ```jsx
