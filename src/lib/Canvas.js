@@ -207,16 +207,18 @@ const Canvas = ({
     const magnCtx = magnifierCanvasRef.current.getContext('2d')
     clearMagnifier()
 
+    // TODO we should make those 5, 10 and 20 values proportionate
+    // to the point size
     magnCtx.drawImage(
       previewCanvasRef.current,
-      x - 15,
-      y - 15,
-      35,
-      35,
-      x - 10,
+      x - (pointSize - 10),
+      y - (pointSize - 10),
+      pointSize + 5,
+      pointSize + 5,
+      x + 10,
       y - 90,
-      50,
-      50
+      pointSize + 20,
+      pointSize + 20
     )
 
     setCropPoints((cPs) => ({ ...cPs, [area]: { x, y } }))
