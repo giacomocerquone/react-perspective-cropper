@@ -7,7 +7,8 @@ export interface CropperProps {
   cropperRef: React.ElementRef
   pointSize: number
   lineWidth: number
-  pointColor: string
+  pointBgColor: string
+  pointBorder: string
   lineColor: string
   maxWidth: number
   maxHeight: number

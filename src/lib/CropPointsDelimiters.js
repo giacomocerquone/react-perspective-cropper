@@ -23,22 +23,24 @@ const CropPointsDelimiters = ({
   }, [cropPoints])
 
   const drawShape = useCallback(
-    (sortedPoints) => {
+    ([point1, point2, point3, point4]) => {
       const ctx = canvas.current.getContext('2d')
       ctx.lineWidth = lineWidth
       ctx.strokeStyle = lineColor
+
       ctx.beginPath()
-      sortedPoints.forEach((point, index) => {
-        if (index === 0) {
-          ctx.moveTo(point.x, point.y)
-        }
-        if (index !== sortedPoints.length - 1) {
-          const nextPoint = sortedPoints[index + 1]
-          ctx.lineTo(nextPoint.x, nextPoint.y)
-        } else {
-          ctx.closePath()
-        }
-      })
+      ctx.moveTo(point1.x + 15, point1.y)
+      ctx.lineTo(point2.x - 15, point2.y)
+
+      ctx.moveTo(point2.x, point2.y + 15)
+      ctx.lineTo(point3.x, point3.y - 15)
+
+      ctx.moveTo(point3.x - 15, point3.y)
+      ctx.lineTo(point4.x + 15, point4.y)
+
+      ctx.moveTo(point4.x, point4.y - 15)
+      ctx.lineTo(point1.x, point1.y + 15)
+      ctx.closePath()
       ctx.stroke()
     },
     [canvas.current]

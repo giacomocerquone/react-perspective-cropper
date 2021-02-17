@@ -2,10 +2,11 @@ import React, { useCallback } from 'react'
 import Draggable from 'react-draggable'
 import T from 'prop-types'
 
-const buildCropPointStyle = (size, color) => ({
+const buildCropPointStyle = (size, pointBgColor, pointBorder) => ({
   width: size,
   height: size,
-  backgroundColor: color,
+  backgroundColor: pointBgColor,
+  border: pointBorder,
   borderRadius: '100%',
   position: 'absolute',
   zIndex: 1001
@@ -16,7 +17,8 @@ const CropPoint = ({
   pointArea,
   defaultPosition,
   pointSize,
-  pointColor = '#3cabe2',
+  pointBgColor = 'transparent',
+  pointBorder = '4px solid #3cabe2',
   onStop: externalOnStop,
   onDrag: externalOnDrag,
   bounds
@@ -61,7 +63,7 @@ const CropPoint = ({
       onDrag={onDrag}
       onStop={onStop}
     >
-      <div style={buildCropPointStyle(pointSize, pointColor)} />
+      <div style={buildCropPointStyle(pointSize, pointBgColor, pointBorder)} />
     </Draggable>
   )
 }
