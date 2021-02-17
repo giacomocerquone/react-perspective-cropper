@@ -83,7 +83,8 @@ CropPoint.propTypes = {
     y: T.number
   }),
   pointSize: T.number,
-  pointColor: T.string,
+  pointBgColor: T.string,
+  pointBorder: T.string,
   onStop: T.func,
   onDrag: T.func
 }

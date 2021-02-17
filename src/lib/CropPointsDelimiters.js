@@ -5,7 +5,8 @@ const CropPointsDelimiters = ({
   cropPoints,
   previewDims,
   lineWidth = 3,
-  lineColor = '#3cabe2'
+  lineColor = '#3cabe2',
+  pointSize
 }) => {
   const canvas = useRef()
 
@@ -29,17 +30,17 @@ const CropPointsDelimiters = ({
       ctx.strokeStyle = lineColor
 
       ctx.beginPath()
-      ctx.moveTo(point1.x + 15, point1.y)
-      ctx.lineTo(point2.x - 15, point2.y)
+      ctx.moveTo(point1.x + pointSize / 2, point1.y)
+      ctx.lineTo(point2.x - pointSize / 2, point2.y)
 
-      ctx.moveTo(point2.x, point2.y + 15)
-      ctx.lineTo(point3.x, point3.y - 15)
+      ctx.moveTo(point2.x, point2.y + pointSize / 2)
+      ctx.lineTo(point3.x, point3.y - pointSize / 2)
 
-      ctx.moveTo(point3.x - 15, point3.y)
-      ctx.lineTo(point4.x + 15, point4.y)
+      ctx.moveTo(point3.x - pointSize / 2, point3.y)
+      ctx.lineTo(point4.x + pointSize / 2, point4.y)
 
-      ctx.moveTo(point4.x, point4.y - 15)
-      ctx.lineTo(point1.x, point1.y + 15)
+      ctx.moveTo(point4.x, point4.y - pointSize / 2)
+      ctx.lineTo(point1.x, point1.y + pointSize / 2)
       ctx.closePath()
       ctx.stroke()
     },
@@ -84,5 +85,6 @@ CropPointsDelimiters.propTypes = {
     'left-bottom': T.shape({ x: T.number, y: T.number }).isRequired
   }),
   lineColor: T.string,
-  lineWidth: T.number
+  lineWidth: T.number,
+  pointSize: T.number
 }
