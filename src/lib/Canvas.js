@@ -3,7 +3,8 @@ import React, {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState
+  useState,
+  Fragment
 } from 'react'
 import { useOpenCv } from 'opencv-react'
 import T from 'prop-types'
@@ -37,6 +38,7 @@ const Canvas = ({
   const { loaded: cvLoaded, cv } = useOpenCv()
   const canvasRef = useRef()
   const previewCanvasRef = useRef()
+  const magnifierCanvasRef = useRef()
   const [previewDims, setPreviewDims] = useState()
   const [cropPoints, setCropPoints] = useState()
   const [loading, setLoading] = useState(false)
@@ -167,6 +169,16 @@ const Canvas = ({
     setCropPoints(contourCoordinates)
   }
 
+  const clearMagnifier = () => {
+    const magnCtx = magnifierCanvasRef.current.getContext('2d')
+    magnCtx.clearRect(
+      0,
+      0,
+      magnifierCanvasRef.current.width,
+      magnifierCanvasRef.current.height
+    )
+  }
+
   useEffect(() => {
     if (onChange) {
       onChange({ ...cropPoints, loading })
@@ -191,11 +203,28 @@ const Canvas = ({
 
   const onDrag = useCallback((position, area) => {
     const { x, y } = position
+
+    const magnCtx = magnifierCanvasRef.current.getContext('2d')
+    clearMagnifier()
+
+    magnCtx.drawImage(
+      previewCanvasRef.current,
+      x - 15,
+      y - 15,
+      35,
+      35,
+      x - 10,
+      y - 90,
+      50,
+      50
+    )
+
     setCropPoints((cPs) => ({ ...cPs, [area]: { x, y } }))
   }, [])
 
   const onStop = useCallback((position, area, cropPoints) => {
     const { x, y } = position
+    clearMagnifier()
     setCropPoints((cPs) => ({ ...cPs, [area]: { x, y } }))
     if (onDragStop) {
       onDragStop({ ...cropPoints, [area]: { x, y } })
@@ -210,36 +239,48 @@ const Canvas = ({
       }}
     >
       {previewDims && mode === 'crop' && cropPoints && (
-        <CropPoints
-          pointSize={pointSize}
-          pointBgColor={pointBgColor}
-          pointBorder={pointBorder}
-          cropPoints={cropPoints}
-          previewDims={previewDims}
-          onDrag={onDrag}
-          onStop={onStop}
-          bounds={{
-            left: previewCanvasRef?.current?.offsetLeft - pointSize / 2,
-            top: previewCanvasRef?.current?.offsetTop - pointSize / 2,
-            right:
-              previewCanvasRef?.current?.offsetLeft -
-              pointSize / 2 +
-              previewCanvasRef?.current?.offsetWidth,
-            bottom:
-              previewCanvasRef?.current?.offsetTop -
-              pointSize / 2 +
-              previewCanvasRef?.current?.offsetHeight
-          }}
-        />
+        <Fragment>
+          <CropPoints
+            pointSize={pointSize}
+            pointBgColor={pointBgColor}
+            pointBorder={pointBorder}
+            cropPoints={cropPoints}
+            previewDims={previewDims}
+            onDrag={onDrag}
+            onStop={onStop}
+            bounds={{
+              left: previewCanvasRef?.current?.offsetLeft - pointSize / 2,
+              top: previewCanvasRef?.current?.offsetTop - pointSize / 2,
+              right:
+                previewCanvasRef?.current?.offsetLeft -
+                pointSize / 2 +
+                previewCanvasRef?.current?.offsetWidth,
+              bottom:
+                previewCanvasRef?.current?.offsetTop -
+                pointSize / 2 +
+                previewCanvasRef?.current?.offsetHeight
+            }}
+          />
+          <CropPointsDelimiters
+            previewDims={previewDims}
+            cropPoints={cropPoints}
+            lineWidth={lineWidth}
+            lineColor={lineColor}
+            pointSize={pointSize}
+          />
+          <canvas
+            style={{
+              position: 'absolute',
+              zIndex: 5,
+              pointerEvents: 'none'
+            }}
+            width={previewDims.width}
+            height={previewDims.height}
+            ref={magnifierCanvasRef}
+          />
+        </Fragment>
       )}
-      {previewDims && mode === 'crop' && cropPoints && (
-        <CropPointsDelimiters
-          previewDims={previewDims}
-          cropPoints={cropPoints}
-          lineWidth={lineWidth}
-          lineColor={lineColor}
-        />
-      )}
+
       <canvas
         style={{ zIndex: 5, pointerEvents: 'none' }}
         ref={previewCanvasRef}
@@ -262,6 +303,7 @@ Canvas.propTypes = {
   }),
   pointSize: T.number,
   lineWidth: T.number,
-  pointColor: T.string,
+  pointBgColor: T.string,
+  pointBorder: T.string,
   lineColor: T.string
 }

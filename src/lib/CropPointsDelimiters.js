@@ -60,9 +60,7 @@ const CropPointsDelimiters = ({
       ref={canvas}
       style={{
         position: 'absolute',
-        zIndex: 5,
-        width: previewDims.width,
-        height: previewDims.height
+        zIndex: 5
       }}
       width={previewDims.width}
       height={previewDims.height}
