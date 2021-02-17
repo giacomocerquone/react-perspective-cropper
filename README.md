@@ -45,7 +45,8 @@ export interface CropperProps {
   cropperRef: React.ElementRef
   pointSize: number
   lineWidth: number
-  pointColor: string
+  pointBgColor: string
+  pointBorder: string // css border property value
   lineColor: string
   maxWidth: number
   maxHeight: number
@@ -108,6 +109,20 @@ const App = () => {
 This cropper uses OpenCV for border recognition, perspective transformation and b&w thresholding. In order to use it, I've created this other handy wrapper around it: [opencv-react](https://github.com/giacomocerquone/opencv-react)<br/>
 If you're already using it or if you're importing OpenCV manually in a different way, **this lib got you covered as long as you provide the OpenCV instance in `window.cv` and the component isn't rendered before OpenCV finished loading**. <br/>
 So, be careful.
+
+## OpenCV async loading
+
+The openCV library is really big (approx. 1mb for the entire js file).<br/>
+Now, opencv-react uses the `document.createElement('script')` browser function to inject this script and that's equal to writing `<script src="..."></script>` in your html page. The parsing of the js file from the browser is done synchronously and we don't want this since it'd block the js thread.<br/>
+The solution, which is already implemented in the opencv-react lib, is to use the keyword async in front of the script tag. This won't block the thread but still **you gotta decide** when to load it.<br/><br/>
+Basically I can imagine many, if not all, of you will render this component under certain conditions; well you need to know that doing so you'll start fetching and asynchronously parsing the library only when you'll render this cropper component.<br/>
+If you wanna start fetching the lib as soon as your app is opened, then you want to wrap your entire app with the opencv-react provider and then render the component whenever you want. The cropper will surely start faster, straight away.
+
+## OpenCV locally or from CDN
+
+You might be asking yourself this question. Well, openCV or not, the answer doesn't differ based on the libs you need in your project.<br/>
+Always fewer js devs import stuff from cdns nowadays (think about `npm i`). If you notice the example folder the lib is loaded locally.<br/>
+But this lib doesn't decide this on your behalf. Do what you think is best :)
 
 ## Nice to have
 
