@@ -17,11 +17,9 @@ You **must** pass an img through the `src` prop otherwise the component won't be
 
 If you have special needs, please open a issue and we'll discuss it there!
 
-## Demo
+## [Demo](https://giacomocerquone.github.io/react-perspective-cropper/)
 
 ![demo gif](https://github.com/giacomocerquone/react-perspective-cropper/blob/master/gifs/react-perspective-cropper.gif?raw=true)
-
-Take a look at the hosted example [here](https://giacomocerquone.github.io/react-perspective-cropper/)
 
 ## Install
 
