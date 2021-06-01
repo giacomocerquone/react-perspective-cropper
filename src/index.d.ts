@@ -4,8 +4,8 @@ declare module "react-perspective-cropper" {
 
   export interface CropperProps {
     image: File | null;
-    onDragStop: () => void;
-    onChange: () => void;
+    onDragStop: (e:any) => void;
+    onChange: (e:any) => void;
     cropperRef: React.ElementRef;
     pointSize: number;
     lineWidth: number;
