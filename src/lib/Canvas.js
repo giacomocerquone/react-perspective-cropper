@@ -9,7 +9,7 @@ import React, {
 import { useOpenCv } from 'opencv-react'
 import T from 'prop-types'
 
-import { calcDims, readFile } from '../lib/utils'
+import { calcDims, readFile, isCrossOriginURL } from "./utils";
 import CropPoints from '../lib/CropPoints'
 import { applyFilter, transform } from '../lib/imgManipulation'
 import CropPointsDelimiters from './CropPointsDelimiters'
@@ -108,6 +108,7 @@ const Canvas = ({
         setPreviewPaneDimensions()
         resolve()
       }
+      if (isCrossOriginURL(src)) img.crossOrigin = true;
       img.src = src
     })
   }
