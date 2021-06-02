@@ -9,7 +9,7 @@ import React, {
 import { useOpenCv } from 'opencv-react'
 import T from 'prop-types'
 
-import { calcDims, readFile, isCrossOriginURL } from './utils'
+import { calcDims, readFile, isCrossOriginURL } from '../lib/utils'
 import CropPoints from '../lib/CropPoints'
 import { applyFilter, transform } from '../lib/imgManipulation'
 import CropPointsDelimiters from './CropPointsDelimiters'
