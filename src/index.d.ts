@@ -2,11 +2,19 @@ import React from "react";
 declare module "react-perspective-cropper" {
   export interface Cropper extends React.FC<CropperProps> {}
 
+  export interface CropperState {
+    loading: boolean;
+    "left-bottom": { x: number; y: number };
+    "left-top": { x: number; y: number };
+    "right-bottom": { x: number; y: number };
+    "right-top": { x: number; y: number };
+  }
+
   export interface CropperProps {
-    image: File | null;
-    onDragStop: (e:any) => void;
-    onChange: (e:any) => void;
-    cropperRef: React.ElementRef;
+    image: File | null | string;
+    onDragStop: (s: CropperState) => void;
+    onChange: (s: CropperState) => void;
+    ref: React.ElementRef;
     pointSize: number;
     lineWidth: number;
     pointBgColor: string;
