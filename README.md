@@ -51,7 +51,18 @@ export interface CropperProps {
   openCvPath: string
 }
 ```
-
+## OpenCV Filter Props
+```typescript
+export interface filterCvParams = {
+  blur: boolean,
+  th: boolean,
+  thMode: integer, //provided by OpenCV
+  thMeanCorrection: integer,
+  thBlockSize: integer,
+  thMax: integer,
+  grayScale: false,
+}
+```
 ## Usage
 
 ```jsx
@@ -101,6 +112,73 @@ const App = () => {
   )
 }
 ```
+
+## Applying Filters Example
+
+```jsx
+import React from 'react'
+import Cropper from 'react-perspective-cropper'
+
+const App = () => {
+  const [cropState, setCropState] = useState()
+  const [img, setImg] = useState()
+  const [inputKey, setInputKey] = useState(0)
+  const cropperRef = useRef()
+
+  const onDragStop = useCallback((s) => setCropState(s), [])
+  const onChange = useCallback((s) => setCropState(s), [])
+
+  const doSomething = async () => {
+    console.log(cropState)
+    try {
+      // Get the OpenCV ref
+      const { cv } = cropperRef.current;
+      // Declare the filter params that should be applied to the cropped image
+      const filter = { 
+        blur: false,
+        th: true,
+        thMode: cv.ADAPTIVE_THRESH_MEAN_C,
+        thMeanCorrection: 15,
+        thBlockSize: 25,
+        thMax: 255,
+        grayScale: true,
+      };
+      
+      const res = await cropperRef.current.done({ 
+        preview: true,
+        filterCvParams: filter
+      })
+      console.log(res)
+    } catch (e) {
+      console.log('error', e)
+    }
+  }
+
+  const onImgSelection = async (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      // it can also be a http or base64 string for example
+      setImg(e.target.files[0])
+    }
+  }
+
+  return (
+    <Cropper
+      ref={cropperRef}
+      image={img}
+      onChange={onChange}
+      onDragStop={onDragStop}
+    />
+    <input
+      type='file'
+      key={inputKey}
+      onChange={onImgSelection}
+      accept='image/*'
+    />
+    <button onClick={doSomething}>Ho finito</button>
+  )
+}
+```
+
 
 ## OpenCV
 
