@@ -56,11 +56,11 @@ export interface CropperProps {
 export interface filterCvParams = {
   blur: boolean,
   th: boolean,
-  thMode: integer, //provided by OpenCV
-  thMeanCorrection: integer,
-  thBlockSize: integer,
-  thMax: integer,
-  grayScale: false,
+  thMode: number, //provided by OpenCV
+  thMeanCorrection: number,
+  thBlockSize: number,
+  thMax: number,
+  grayScale: boolean,
 }
 ```
 ## Usage
