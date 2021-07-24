@@ -72,7 +72,8 @@ const Canvas = ({
           setLoading(false)
         }, image.type)
       })
-    }
+    },
+    cv
   }))
 
   useEffect(() => {
