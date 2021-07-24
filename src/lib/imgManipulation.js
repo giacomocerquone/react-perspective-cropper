@@ -61,12 +61,12 @@ export const applyFilter = async (cv, docCanvas, filterCvParams) => {
   // default options
   const options = {
     blur: false,
-    th: true,
+    th: false,
     thMode: cv.ADAPTIVE_THRESH_MEAN_C,
     thMeanCorrection: 15,
     thBlockSize: 25,
     thMax: 255,
-    grayScale: true,
+    grayScale: false,
     ...filterCvParams
   }
   const dst = cv.imread(docCanvas)
