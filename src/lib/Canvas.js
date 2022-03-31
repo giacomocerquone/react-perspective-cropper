@@ -108,7 +108,7 @@ const Canvas = ({
         setPreviewPaneDimensions()
         resolve()
       }
-      if (isCrossOriginURL(src)) img.crossOrigin = true
+      if (isCrossOriginURL(src)) img.crossOrigin = "anonymous"
       img.src = src
     })
   }
