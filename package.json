@@ -30,7 +30,7 @@
     "release:major": "standard-version --release-as major"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": ">=16.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
@@ -49,16 +49,16 @@
     "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1",
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1",
+    "react-scripts": "3.4.1",
     "standard-version": "^9.1.0"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "opencv-react": "0.0.4",
+    "opencv-react": "git@github.com:RakeshYadvanshi/opencv-react.git#e669637055cd5a5f73de67433de654146bd25355",
     "prop-types": "^15.7.2",
     "react-draggable": "^4.4.3"
   }
