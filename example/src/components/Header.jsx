@@ -22,10 +22,10 @@ const Header = () => {
             </a>
           </Descriptions.Item>
           <Descriptions.Item label='Description'>
-            <Paragraph>
+            <span role='img' aria-label='Description'>
               React component performing border detection, perspective
               correction and simple image filters over a provided image 📲 📸
-            </Paragraph>
+            </span>
           </Descriptions.Item>
           <Descriptions.Item label='Created by'>
             Giacomo Cerquone from
@@ -47,7 +47,7 @@ const Header = () => {
               <br />
               <b>
                 <a
-                  rel='noreferrer'
+                  rel='noopener noreferrer'
                   target='_blank'
                   href='https://github.com/giacomocerquone/react-perspective-cropper/blob/master/gifs/example-img.jpg?raw=true'
                 >

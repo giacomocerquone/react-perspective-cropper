@@ -22,8 +22,9 @@ const App = () => {
       const res = await cropperRef.current.done({
         preview: true,
         filterCvParams: {
-          thMeanCorrection: 13,
-          thMode: window.cv.ADAPTIVE_THRESH_GAUSSIAN_C
+          grayScale: false,
+          blur: false,
+          th: false
         }
       })
       console.log('Cropped and filtered image', res)
