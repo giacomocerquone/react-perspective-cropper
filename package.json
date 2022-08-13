@@ -1,7 +1,7 @@
 {
   "name": "react-perspective-cropper",
   "homepage": ".",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "React component performing crop, border detection, perspective correction and simple image filters over a provided image 📲 📸",
   "author": "giacomocerquone",
   "license": "MIT",
@@ -34,33 +34,33 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
-    "cross-env": "^7.0.2",
+    "cross-env": "^7.0.3",
     "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-config-standard": "^14.1.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-standard": "^14.1.1",
     "eslint-config-standard-react": "^9.2.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-standard": "^4.0.1",
-    "gh-pages": "^2.2.0",
-    "microbundle-crl": "^0.13.10",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-standard": "^4.1.0",
+    "gh-pages": "^4.0.0",
+    "microbundle-crl": "^0.13.11",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.0.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1",
-    "standard-version": "^9.1.0"
+    "prettier": "^2.7.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-scripts": "^3.4.4",
+    "standard-version": "^9.5.0"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "caniuse-lite": "^1.0.30001367",
-    "opencv-react": "0.0.4",
-    "prop-types": "^15.7.2",
-    "react-draggable": "^4.4.3"
+    "caniuse-lite": "^1.0.30001375",
+    "opencv-react": "^0.0.5",
+    "prop-types": "^15.8.1",
+    "react-draggable": "^4.4.5"
   }
 }

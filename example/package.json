@@ -10,12 +10,13 @@
     "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.3.0",
-    "antd": "^4.10.0",
+    "@ant-design/icons": "^4.7.0",
+    "antd": "^4.22.4",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-perspective-cropper": "link:..",
-    "react-scripts": "link:../node_modules/react-scripts"
+    "react-scripts": "link:../node_modules/react-scripts",
+    "eslint": "^6.6.0"
   },
   "devDependencies": {
     "@babel/plugin-syntax-object-rest-spread": "^7.8.3"

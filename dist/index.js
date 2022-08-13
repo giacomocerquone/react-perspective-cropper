@@ -7,7 +7,7 @@ var T = _interopDefault(require('prop-types'));
 var Draggable = _interopDefault(require('react-draggable'));
 
 function _extends() {
-  _extends = Object.assign || function (target) {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -20,7 +20,6 @@ function _extends() {
 
     return target;
   };
-
   return _extends.apply(this, arguments);
 }
 
@@ -164,9 +163,11 @@ CropPoint.propTypes = {
   onDrag: T.func
 };
 
+var _excluded = ["previewDims"];
+
 var CropPoints = function CropPoints(props) {
   var previewDims = props.previewDims,
-      otherProps = _objectWithoutPropertiesLoose(props, ["previewDims"]);
+      otherProps = _objectWithoutPropertiesLoose(props, _excluded);
 
   return /*#__PURE__*/React__default.createElement(React.Fragment, null, /*#__PURE__*/React__default.createElement(CropPoint, _extends({
     pointArea: "left-top",
