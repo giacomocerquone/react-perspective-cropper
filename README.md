@@ -52,6 +52,29 @@ export interface CropperProps {
 }
 ```
 
+## `filterCvParams` Property
+
+The `filterCvParams` property allows you get bit more control over the cropping and filtering in `react-perspective-cropper`.
+
+#### Usage
+
+
+```typescript
+filterCvParams: {
+    blur: false,                         // Applies a Gaussian blur to the image.
+    th: true,                            // Applies adaptive thresholding to the image.
+    thMode: cv.ADAPTIVE_THRESH_MEAN_C,   // Determines the method used for adaptive thresholding.
+    thMeanCorrection: 15,                // Adjusts the mean for thresholding.
+    thBlockSize: 25,                     // Determines the size of the block for adaptive thresholding.
+    thMax: 255,                          // Sets the maximum value for thresholding.
+    grayScale: true                      // Converts the image to grayscale.
+}
+
+
+// Configuration for image processing that can be passed to the function.
+const filterParams = { preview: false, filterCvParams};
+```
+
 ## Usage
 
 ```jsx
