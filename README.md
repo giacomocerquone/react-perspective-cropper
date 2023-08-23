@@ -73,6 +73,10 @@ filterCvParams: {
 
 // Configuration for image processing that can be passed to the function.
 const filterParams = { preview: false, filterCvParams};
+
+// Pass the filterParams configuration to the `cropperRef.current.done()` function.
+const res = await cropperRef.current.done(filterParams);
+
 ```
 
 ## Usage
